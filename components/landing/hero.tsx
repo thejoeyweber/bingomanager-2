@@ -55,7 +55,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           className="text-balance text-6xl font-bold"
         >
-          Save time and start building.
+          Run better bingo games.
         </motion.div>
 
         <motion.div
@@ -64,8 +64,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           className="max-w-xl text-balance text-xl"
         >
-          Use Mckay's app template to save time and get started with your next
-          project.
+          Professional bingo management software for organizers, callers, and players.
         </motion.div>
 
         <motion.div

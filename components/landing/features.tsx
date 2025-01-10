@@ -18,7 +18,9 @@ import {
   Database,
   DollarSign,
   LucideIcon,
-  Shield
+  Shield,
+  AudioWaveform,
+  Bot
 } from "lucide-react"
 
 interface FeatureProps {
@@ -29,24 +31,24 @@ interface FeatureProps {
 
 const features: FeatureProps[] = [
   {
-    title: "Frontend",
-    description: "Next.js, Tailwind, Shadcn, Framer Motion",
+    title: "Game Management",
+    description: "Create and manage multiple bingo games with custom cards and rules",
     icon: AppWindow
   },
   {
-    title: "Backend",
-    description: "Postgres, Supabase, Drizzle ORM, Server Actions",
-    icon: Database
+    title: "Real-time Calling",
+    description: "Professional caller interface with number tracking and verification",
+    icon: AudioWaveform
   },
   {
-    title: "Auth",
-    description: "Clerk",
+    title: "Player Experience",
+    description: "Digital cards, auto-marking, and win verification",
+    icon: Bot
+  },
+  {
+    title: "Security",
+    description: "Secure game sessions with player authentication and fraud prevention",
     icon: Shield
-  },
-  {
-    title: "Payments",
-    description: "Stripe",
-    icon: DollarSign
   }
 ]
 

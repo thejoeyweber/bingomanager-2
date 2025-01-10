@@ -26,19 +26,17 @@ export default async function PricingPage() {
       <h1 className="mb-8 text-center text-3xl font-bold">Choose Your Plan</h1>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <PricingCard
-          title="Monthly Plan"
+          title="Basic Plan"
           price="$10"
-          description="Billed monthly"
+          description="Perfect for small events"
           buttonText="Subscribe Monthly"
-          buttonLink={
-            process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY || "#"
-          }
+          buttonLink={process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY || "#"}
           userId={userId}
         />
         <PricingCard
-          title="Yearly Plan"
+          title="Pro Plan"
           price="$100"
-          description="Billed annually"
+          description="For professional organizers"
           buttonText="Subscribe Yearly"
           buttonLink={process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_YEARLY || "#"}
           userId={userId}
