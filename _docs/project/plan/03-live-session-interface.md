@@ -1,5 +1,3 @@
-File: 03-live-session-interface.md
-
 # 03 – Live Session Interface
 
 ## Goals
@@ -12,6 +10,9 @@ File: 03-live-session-interface.md
 - Display a random call from a mock data set (no DB).
 - Implement a “Claim Bingo” notification popup to show how it will look for the Organizer.
 - Show session stats (number of calls, potential winners) in stubbed form.
+
+> **Implementation Approach (Real-Time Data)**  
+> Initially, we may rely on **periodic polling** or manual refresh calls to fetch new calls/claims from the server. If concurrency grows or we need more immediate updates, we can adopt **Supabase Realtime** or websockets in the future.
 
 ## Completion Criteria
 - The Caller screen is fully interactive with mock calls.

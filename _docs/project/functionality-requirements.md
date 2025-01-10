@@ -1,5 +1,3 @@
-File: functionality-requirements.md
-
 # Functionality & Feature Requirements
 
 This file outlines the complete functionality and features for the Bingo Creator, Manager, and Helper application. All items listed here are part of our initial release scope. We will implement the entire scope, then build out the functionality and back end after the front end is fully laid out.
@@ -17,6 +15,7 @@ This file outlines the complete functionality and features for the Bingo Creator
 - **Card Generation & Distribution**  
   - Generate unique bingo cards in PDF or via online links.
   - Provide options to download in bulk or email to participants.
+  - **Invitations & Emails**: We will integrate a low-cost email service (e.g., SendGrid free tier) to send out game invites or card links where needed.
 - **Templates**  
   - Allow users to save game configurations as reusable templates (theme, rules, items).
   - Provide import/export functionality for templates.
@@ -44,8 +43,10 @@ This file outlines the complete functionality and features for the Bingo Creator
 ## 4. Collaboration & Sharing
 - **Co-Organizers**  
   - Allow Organizer to invite/remove co-organizers with specific permissions.
+  - For now, co-organizers may simply share the same `account_id`, granting them management access to the same games. If needed, a pivot table can provide more granular roles later.
 - **Public & Private Sharing**  
   - Allow game links to be password/code-protected for private events.
+  - Private events may require a game access code or a user to be logged in with an appropriate `account_id`.
 
 ## 5. Analytics & Reporting
 - **Session Overview**  
@@ -64,12 +65,16 @@ This file outlines the complete functionality and features for the Bingo Creator
   - Define distinct roles: Organizer, Co-Organizer, Player, Spectator.
 - **Data Storage**  
   - Store game configurations, card data, and session results in the database.
+- **Membership Tiers**  
+  - `free` users have certain feature limitations (e.g., max active games).
+  - `pro` users (determined via Stripe subscription) unlock advanced features. We’ll use Stripe webhooks to update `profiles.membership`.
 
 ## 7. Customization & Branding
 - **Theme & Layout**  
   - Provide color schemes, fonts, and backgrounds through Tailwind & Shadcn UI.
 - **Image-Based Cards**  
   - Integrate image uploads with built-in cropping/resizing.
+  - **Note**: We will store these images in Supabase Storage and reference them via `image_url`.
 - **Prebuilt Themes**  
   - Include pre-configured sets (e.g., numbers, pop-culture references, holidays).
 

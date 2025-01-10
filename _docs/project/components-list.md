@@ -1,5 +1,3 @@
-File: components-list.md
-
 # Components & UI Patterns
 
 This file details specialized components not already covered by Shadcn UI. We will implement these using Tailwind and Shadcn (see [README.md](../README.md#tech-stack) and [Project Instructions](../.cursorrules)).
@@ -16,6 +14,7 @@ This file details specialized components not already covered by Shadcn UI. We wi
    - Handles image uploads with built-in cropping/resizing.
    - Uses Shadcn UI `Dialog` and `Form` to guide the user through the process.
    - Integrates with Next.js server actions for final file storage.
+   - **Storage**: By default, images are uploaded to **Supabase Storage**. The final `image_url` is stored in the DB.
 
 3. **CallHistoryList**
    - Displays a scrollable list of called items (text or thumbnail).
@@ -26,6 +25,7 @@ This file details specialized components not already covered by Shadcn UI. We wi
    - Appears when a player claims a win.
    - Uses a Shadcn UI `Dialog` to display the claimant’s card, highlighting called items.
    - Organizer or Co-Organizer can confirm or reject the claim.
+   - If the card is an online card, the system can auto-check against the called items; if it’s a printed/anonymous card, the Organizer may manually override.
 
 5. **CardGenerationConfig**
    - A form or modal for generating cards (number of cards, PDF vs. link).
@@ -98,7 +98,6 @@ Refer to [shadcn/ui docs](https://ui.shadcn.com/docs) for detailed implementatio
 
 Refer to [`/components/ui/`](../components/ui) for the existing library. Do not duplicate them in separate files unless you need specialized variants. Never edit or change the existing shadcn/ui components directly.
 
-
 ## 3. Reusable Patterns
 - **Wizard/Stepper**  
   - We will use a Shadcn UI approach with step-based screens for game creation.
@@ -120,5 +119,3 @@ Refer to [`/components/ui/`](../components/ui) for the existing library. Do not 
 - Always follow the naming, import, and usage rules described in [Project Instructions](../.cursorrules).
 
 These component definitions will be implemented first with stubbed data. Final integration with Drizzle ORM, Supabase, and other back-end details will occur in subsequent steps.
-
-

@@ -1,5 +1,3 @@
-File: app-flow.md
-
 # App Flow & User Journeys
 
 The following user flows are definitive and must be implemented in the Next.js `app` directory, following the structure specified in [Project Instructions](../.cursorrules) and [README.md](../README.md).
