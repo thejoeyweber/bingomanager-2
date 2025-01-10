@@ -1,12 +1,6 @@
-# Mckay's App Template
+# Bingo Manager
 
-This is a full-stack app template for courses on [Takeoff](https://JoinTakeoff.com/).
-
-## Sponsors
-
-If you are interested in sponsoring my repos, please contact me at [ads@takeoffai.org](mailto:ads@takeoffai.org).
-
-Or sponsor me directly on [GitHub Sponsors](https://github.com/sponsors/mckaywrigley).
+This is a full-stack app template for bingo game management and creation.
 
 ## Tech Stack
 
