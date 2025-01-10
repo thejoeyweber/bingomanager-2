@@ -6,33 +6,36 @@ This file details specialized components not already covered by Shadcn UI. We wi
 
 1. **BingoCardGrid**
    - Renders an N x N grid of items.
-   - Accepts an array of item data (text or image) and a called-items state.
-   - Provides a “mark” action for player interactions or read-only mode for spectators.
+   - Accepts an array of item data (text or image) and a “called-items” state.
+   - Provides a “mark” action for players or a read-only mode for spectators.
+   - Some items may be designated “mandatory” (always included) if the Card Type’s list enforces them.
    - Built using `Card`, `Button`, or `Table` from `/components/ui`.
 
-2. **GameItemUploader**
-   - Handles image uploads with built-in cropping/resizing.
-   - Uses Shadcn UI `Dialog` and `Form` to guide the user through the process.
-   - Integrates with Next.js server actions for final file storage.
-   - **Storage**: By default, images are uploaded to **Supabase Storage**. The final `image_url` is stored in the DB.
+2. **GameItemUploader** (or “ListItemUploader”)
+   - Handles image uploads with cropping/resizing.
+   - Uses Shadcn UI `Dialog` and `Form` to guide the user.
+   - Integrates with Next.js server actions for file storage (Supabase).
+   - If item is an image, it may also have an optional caption field.
+   - (In the new approach, these items may belong to a “List.”)
 
 3. **CallHistoryList**
-   - Displays a scrollable list of called items (text or thumbnail).
+   - Displays a scrollable list of called items (text or thumbnails).
    - Highlights the most recent call automatically.
    - Optionally shows timestamps.
 
 4. **WinnerClaimModal**
    - Appears when a player claims a win.
-   - Uses a Shadcn UI `Dialog` to display the claimant’s card, highlighting called items.
-   - Organizer or Co-Organizer can confirm or reject the claim.
-   - If the card is an online card, the system can auto-check against the called items; if it’s a printed/anonymous card, the Organizer may manually override.
+   - Shows the claimant’s card, highlighting called items.
+   - Organizer can confirm or reject the claim.
+   - Auto-check if online card, manual override if printed/anonymous.
 
 5. **CardGenerationConfig**
    - A form or modal for generating cards (number of cards, PDF vs. link).
    - Incorporates Shadcn UI form elements (select, input).
-   - On submission, triggers server action or local mock action until backend integration is ready.
+   - On submission, triggers server or local mock action until backend integration is ready.
 
 ## 2. Standard Shadcn UI Components
+
 Since we rely on shadcn/ui, use these instead of reinventing. Available components in `/components/ui/`:
 
 ### Layout & Structure
@@ -94,28 +97,25 @@ Since we rely on shadcn/ui, use these instead of reinventing. Available componen
 - Pagination
 - Tabs
 
-Refer to [shadcn/ui docs](https://ui.shadcn.com/docs) for detailed implementation guides. Do not duplicate these components unless you need specialized variants.
-
-Refer to [`/components/ui/`](../components/ui) for the existing library. Do not duplicate them in separate files unless you need specialized variants. Never edit or change the existing shadcn/ui components directly.
+Refer to [shadcn/ui docs](https://ui.shadcn.com/docs) for usage details.  
+Never edit or change the existing shadcn/ui components directly.
 
 ## 3. Reusable Patterns
 - **Wizard/Stepper**  
-  - We will use a Shadcn UI approach with step-based screens for game creation.
+  - We originally had a 4-step wizard, but have introduced a more flexible approach. If you still want wizard-like steps, you can do so in the “Game” page as a guided flow.
 - **Dashboard Layout**  
   - A shared layout with a sidebar for navigation.
 - **Overlay Notifications**  
-  - Will use Shadcn UI toasts for events like claim notifications or errors.
+  - Shadcn UI toasts for claims, errors, etc.
 
 ## 4. Notes on Styling & Theming
 - **Tailwind + Shadcn**  
-  - Adhere to consistent spacing and typography rules outlined in `.cursorrules`.
+  - Adhere to consistent spacing and typography from `.cursorrules`.
 - **Framer Motion**  
-  - Apply interactive animations to transitions (e.g., confetti on a confirmed win).
-  - Ensure performance is maintained for large-scale events.
+  - Use for interactive animations on transitions or events.
 
 ## 5. Integration with the App Structure
 - For route-specific components, place them under `app/[route]/_components`.
 - For truly shared components, place them under `components/`.
-- Always follow the naming, import, and usage rules described in [Project Instructions](../.cursorrules).
 
-These component definitions will be implemented first with stubbed data. Final integration with Drizzle ORM, Supabase, and other back-end details will occur in subsequent steps.
+These definitions will be implemented first with stubbed data; final integration with Drizzle ORM, Supabase, etc. will occur in later steps.

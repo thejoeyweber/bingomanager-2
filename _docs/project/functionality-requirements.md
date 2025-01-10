@@ -1,97 +1,94 @@
 # Functionality & Feature Requirements
 
-This file outlines the complete functionality and features for the Bingo Creator, Manager, and Helper application. All items listed here are part of our initial release scope. We will implement the entire scope, then build out the functionality and back end after the front end is fully laid out.
+All items in this file are part of our initial release scope, now updated with the new approach for Lists, Card Types, etc.
 
 ## 1. Game Creation & Management
-- **Create & Edit Bingo Games**  
-  - Provide fields for game title, description, theme, and language.
-  - Allow configuration of game items (text or images).
-  - Enable selection of grid size (3x3, 4x4, 5x5, etc.).
-  - Support various winning patterns (single line, multiple lines, blackout, custom shapes).
+- **Minimal “New Game” Creation**  
+  - Provide at least a title; optional description.
+  - Game is created in “Draft” status immediately.
+- **Lists & Card Types**  
+  - A user can attach or create a List (numbers, words, images).
+  - One or more Card Types can be created under a Game, each referencing a chosen List.
+  - Card Type defines grid size, free space, color scheme, etc.
 - **Game Rules & Pacing**  
-  - Allow choice between automatic (timed) or manual calls.
-  - Include pause and resume functionality.
-  - Support either round-based or single-round structures.
+  - Default call mode (manual vs. timed) can be set at the game level, overridden by a Card Type or Session.
+  - Round-based or single-round sessions are supported.
 - **Card Generation & Distribution**  
-  - Generate unique bingo cards in PDF or via online links.
-  - Provide options to download in bulk or email to participants.
-  - **Invitations & Emails**: We will integrate a low-cost email service (e.g., SendGrid free tier) to send out game invites or card links where needed.
+  - Generate unique cards in PDF or via online links from a Card Type.
+  - Download in bulk or email to participants.
+  - Integrate a low-cost email service (e.g., SendGrid) for invites if needed.
 - **Templates**  
-  - Allow users to save game configurations as reusable templates (theme, rules, items).
-  - Provide import/export functionality for templates.
+  - Let users save game setups (Lists, Card Types) as templates.
+  - Provide import/export for templates.
 
 ## 2. Live Session (Caller) Interface
 - **Real-Time Calls**  
-  - Randomly display called items (text or images).
+  - Randomly display called items from the chosen List or Card Type arrangement.
   - Keep a visible, scrollable call history.
 - **Caller Controls**  
-  - Provide buttons to pause/resume, skip, or re-draw calls as needed.
-  - Display statistics (number of calls, number of winners).
+  - Pause/resume, skip, or re-draw calls as needed.
+  - Display stats (calls count, winner count).
 - **Round Transition**  
-  - Allow auto or manual progression to next round (if multiple rounds are configured).
-  - Optionally display a countdown timer for each round.
+  - Handle multiple rounds if configured.
+  - Optionally display countdown timers.
 
 ## 3. Player & Spectator Experience
 - **Join a Game**  
-  - Players can join via invite link, code, or email (public or private).
+  - Via invite link, code, or email.
 - **Bingo Card Interaction**  
-  - Players see and mark their own bingo cards in real time.
+  - Each card is generated from a Card Type layout.
   - A “Claim Bingo” button alerts the Organizer.
 - **Spectator Mode**  
-  - Provides a read-only display of calls and game progress.
+  - Read-only display of calls and progress.
 
 ## 4. Collaboration & Sharing
 - **Co-Organizers**  
-  - Allow Organizer to invite/remove co-organizers with specific permissions.
-  - For now, co-organizers may simply share the same `account_id`, granting them management access to the same games. If needed, a pivot table can provide more granular roles later.
+  - Organizer can invite or remove co-organizers with shared access. 
+  - For more complexity, use an `account_members` pivot table.
 - **Public & Private Sharing**  
-  - Allow game links to be password/code-protected for private events.
-  - Private events may require a game access code or a user to be logged in with an appropriate `account_id`.
+  - Optionally password/code-protect a game.
+  - Could require sign-in for private events.
 
 ## 5. Analytics & Reporting
 - **Session Overview**  
-  - List called items in order, record timestamps, and track winners.
-  - Measure time to first win and other relevant statistics.
+  - Called items in order, timestamps, winners.
 - **Export**  
-  - Provide PDF or CSV export of each session’s results.
+  - PDF or CSV for each session’s results.
 - **Multi-Session Insights**  
-  - Store and display past session data in the user’s account.
+  - Past sessions stored and displayed.
 
 ## 6. User Account & Data Management
 - **User Profiles**  
-  - Use Clerk for user authentication (see `.cursorrules` and `README.md`).
-  - Persist profile data in Postgres via Supabase.
+  - Clerk-based auth, data in Postgres via Supabase.
 - **Roles**  
-  - Define distinct roles: Organizer, Co-Organizer, Player, Spectator.
+  - Organizer, Co-Organizer, Player, Spectator, with advanced roles possible later.
 - **Data Storage**  
-  - Store game configurations, card data, and session results in the database.
+  - Use Drizzle ORM for game configs, cards, session results in the DB.
 - **Membership Tiers**  
-  - `free` users have certain feature limitations (e.g., max active games).
-  - `pro` users (determined via Stripe subscription) unlock advanced features. We’ll use Stripe webhooks to update `profiles.membership`.
+  - `free` vs. `pro`, updated via Stripe subscription.
 
 ## 7. Customization & Branding
 - **Theme & Layout**  
-  - Provide color schemes, fonts, and backgrounds through Tailwind & Shadcn UI.
+  - Provide color schemes, fonts, backgrounds at the Card Type or game level.
 - **Image-Based Cards**  
-  - Integrate image uploads with built-in cropping/resizing.
-  - **Note**: We will store these images in Supabase Storage and reference them via `image_url`.
+  - Upload images via Supabase Storage, with optional cropping.
 - **Prebuilt Themes**  
-  - Include pre-configured sets (e.g., numbers, pop-culture references, holidays).
+  - Starter sets (numbers, pop-culture, holidays).
 
 ## 8. Accessibility & Internationalization
 - **High-Contrast Mode**  
-  - Ensure compliance with major accessibility guidelines (WCAG).
+  - Ensure WCAG compliance.
 - **Text-to-Speech**  
-  - Optionally read out called items for visually impaired users.
+  - Optional read-out of called items.
 - **Multi-Language**  
-  - Allow creation of items and app interface in different languages.
+  - Lists and interface in multiple languages.
 
 ## 9. Scalability & Performance
 - **Large Events**  
-  - Must handle hundreds or thousands of simultaneous participants.
+  - Support hundreds or thousands of participants.
 - **Offline/Hybrid**  
-  - Enable PDF generation and offline card usage if real-time connectivity fails.
+  - PDF generation for offline cards.
 - **Analytics**  
-  - Track usage metrics through PostHog (see README and `.cursorrules`).
+  - Track usage with PostHog.
 
-Use these requirements in conjunction with the [app-flow.md](./app-flow.md) and the project’s `.cursorrules` for detailed technical guidelines.
+Use these requirements with [app-flow.md](./app-flow.md) and `.cursorrules` for detailed guidelines.

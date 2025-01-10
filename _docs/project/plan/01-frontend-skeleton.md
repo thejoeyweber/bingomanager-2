@@ -1,5 +1,3 @@
-File: 01-frontend-skeleton.md
-
 # 01 – Frontend Skeleton
 
 ## Goals
@@ -7,20 +5,20 @@ File: 01-frontend-skeleton.md
 2. Create placeholder pages for:
    - Landing
    - Dashboard
-   - Game Creation Wizard (all steps)
+   - **Game** (Overview, Lists, Card Types)
    - Live Session (Caller)
    - Player Screen
    - Spectator Screen
    - Reports/Analytics
-3. Implement a global layout and basic navigation (header, footer).
+3. Implement a global layout (header, footer).
 
 ## Key Tasks
 - Set up `(marketing)` vs. `(auth)` route groups for public landing pages and auth flows.
-- Add minimal placeholders for each screen listed in [page-screen-list.md](../page-screen-list.md).
-- Configure Shadcn UI and Tailwind according to `.cursorrules`.
-- Use Clerk for basic login/sign-up, tested locally.
+- Add minimal placeholders for each screen in [page-screen-list.md](../page-screen-list.md).
+- Configure Shadcn UI + Tailwind as per `.cursorrules`.
+- Use Clerk for login/sign-up; test locally.
 
 ## Completion Criteria
-- All routes exist with placeholders (empty or minimal content).
+- All routes exist with placeholders.
 - Basic header/footer and navigation is in place.
-- Project runs locally without errors.
+- Project runs locally with no errors.

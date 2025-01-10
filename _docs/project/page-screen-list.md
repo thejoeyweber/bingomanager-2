@@ -1,93 +1,76 @@
-File: page-screen-list.md
-
 # Page & Screen Requirements
 
-This file lists each major page/screen in the application and specifies their UI components. These pages will be fully built out in the front end first, using stubbed data, and integrated with the backend later as described in [Project Instructions](../.cursorrules).
+Below is each major page/screen in the application with the new approach. These pages will be built first with stubbed data, then integrated with the backend.
 
 ## 1. Landing Page
-- **Header**  
-  - Logo and nav links (Login, Sign Up).
-- **Hero Section**  
-  - Overview of app features, “Get Started” CTA button.
-- **Feature Highlights**  
-  - Brief bullet points showcasing key functionality.
-- **Footer**  
-  - Company or app info, disclaimers, socials.
+- **Header**
+  - Logo, nav links (Login, Sign Up).
+- **Hero Section**
+  - Overview of app features, CTA button (“Get Started”).
+- **Feature Highlights**
+  - Key functionality bullet points.
+- **Footer**
+  - Disclaimers, socials, about info.
 
 ## 2. Authentication
-- **Login Page** (`(auth)/login`)  
-  - Clerk-based email/password, OAuth options.
-- **Sign-Up Page** (`(auth)/signup`)  
-  - Clerk-based new account creation.
-- **Password Reset**  
-  - Clerk’s built-in password reset flow.
+- **Login Page** (`(auth)/login`)
+  - Clerk-based email/password or OAuth.
+- **Sign-Up Page** (`(auth)/signup`)
+  - Clerk-based new user creation.
+- **Password Reset**
+  - Clerk’s built-in flow.
 
 ## 3. Dashboard (Organizer/Co-Organizer)
-- **Dashboard Home**  
-  - List of games with statuses (Draft, Live, Completed).
-  - Action buttons: Edit, Start Session, Reports.
-  - “Create New Game” button leading to wizard.
-- **Profile & Settings**  
-  - Accessible from a global nav or sidebar.
-  - Manage user data, subscription (if needed), sign out.
+- **Dashboard Home**
+  - List of games (Draft, Live, Completed).
+  - Buttons: Edit, Start Session, Reports, etc.
+  - “Create New Game” → minimal form (title, description).
+- **Profile & Settings**
+  - Manage user data, subscription, sign out.
 
-## 4. Create/Edit Game Wizard
+## 4. (Original) Create/Edit Game Wizard
+> **Note**: Now largely replaced by the approach in [02.01-core-ui-screens.md](../plan/02.01-core-ui-screens.md). The following steps remain in place for legacy reference:
 - **Step 1: Basic Info**  
-  - Inputs for title, description, theme, language.
 - **Step 2: Items Setup**  
-  - Text box or multi-image upload (with defined cropping).
-  - Clear UI for editing item names or removing unwanted items.
 - **Step 3: Layout & Rules**  
-  - Dropdown for grid size, multiple checkboxes for winning patterns.
-  - Pacing controls (manual vs. timed calls).
-  - Color or branding pickers using Shadcn UI form elements.
-- **Step 4: Review & Save**  
-  - Final summary of chosen settings.
-  - “Confirm & Save” triggers game creation or update.
+- **Step 4: Review & Save**
 
 ## 5. Game Overview Page
-- **Title & Summary**  
-  - Key info: # of items, chosen grid size, winning pattern(s).
+- **Overview**  
+  - Title, summary of items/rules, default call mode.
+- **Lists**  
+  - Attach existing list or create a new one (import items).
+- **Card Types**  
+  - Create multiple card types referencing a chosen list.
+  - Configure grid size, free space, colors, etc.
 - **Card Generation**  
-  - Input for number of cards, PDF vs. online link generation.
-  - Download or email distribution options.
+  - Input how many cards, PDF vs. link, distribution.
 - **Session Management**  
-  - “Start Live Session,” “Invite Players,” “Add Co-Organizer.”
+  - “Start Live Session,” “Add Co-Organizer,” etc.
 - **Settings**  
-  - Toggle public/private.
-  - Edit or reset items if not live.
+  - Toggle public/private, edit items if not live.
 
 ## 6. Live Session (Caller) Interface
-- **Main Caller Panel**  
-  - Current called item displayed prominently.
-  - Button for “Call Next Item” or auto-call on a timer.
-- **History & Controls**  
-  - List of all called items (scrollable).
-  - Pause/Resume, End Session.
-  - Display winner count and session stats.
-- **Winner Claims**  
-  - Notifications for new claims.
-  - Verification dialog with the claiming player’s card.
+- **Main Caller Panel**
+  - Current item, “Call Next” or auto-call.
+  - Past calls, pause/resume, end session.
+- **Winner Claims**
+  - Notifications, verification modal.
 
 ## 7. Player Card Screen
-- **Interactive Bingo Card**  
-  - Click/tap to mark items.
-  - “Claim Bingo” button.
-- **Call Feed**  
-  - Recent calls displayed (optional small panel).
-  - Highlight called items in real time.
+- **Interactive Bingo Card**
+  - Mark cells, “Claim Bingo.”
+- **Call Feed**
+  - Shows recent calls if needed.
 
 ## 8. Spectator Screen
-- **Live Calls Display**  
-  - Chronological call list for viewers.
-  - Show winners or near-wins if Organizer chooses.
+- **Live Calls Display**
+  - Chronological calls, winners, near-wins if allowed.
 
 ## 9. Reports & Analytics
-- **Session Summary Page**  
-  - Ordered list of calls, winners, times.
-  - Export as CSV or PDF.
-- **Game History**  
-  - Displays past sessions. 
-  - “Clone Game” or “View Session Reports” buttons.
+- **Session Summary**
+  - Calls, winners, timestamps, export as CSV/PDF.
+- **Game History**
+  - Past sessions, “Clone Game,” “View Reports.”
 
-All these pages and screens will be rendered in Next.js using the structure in [Project Instructions](../.cursorrules). We will initially mock data and interactions so that the UX is finalized before backend integration.
+We build these pages in Next.js with placeholders, then integrate actual DB data in later steps.

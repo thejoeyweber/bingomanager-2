@@ -1,19 +1,17 @@
-File: 08-performance-and-scalability.md
-
 # 08 – Performance & Scalability
 
 ## Goals
-1. Ensure the application can support large events (hundreds or thousands of players).
-2. Optimize database queries, real-time calls, and any potential concurrency bottlenecks.
-3. Finalize offline PDF card generation for participants who cannot go online.
+1. Support large events (hundreds or thousands of players).
+2. Optimize queries, calls, concurrency.
+3. Provide an offline path for PDF card generation.
 
 ## Key Tasks
-- Conduct load testing or basic performance testing on the live session flow.
-- Evaluate pagination or chunked data loading if sessions are very large.
-- Implement caching or efficient fetching where necessary.
-- Provide a reliable offline path for generating and distributing PDFs.
+- Load testing or basic performance tests for live sessions.
+- Implement pagination or chunked loading if item sets or calls are large.
+- Use caching or efficient fetching if necessary.
+- Provide offline PDF distribution for participants without real-time connectivity.
 
 ## Completion Criteria
-- The app remains responsive under a specified concurrency threshold (to be tested).
-- Offline mode for distributing PDFs is seamless and documented in user flows.
-- No major bottlenecks in query performance or real-time updates.
+- The app remains responsive under a specified concurrency threshold.
+- Offline PDFs are easy to generate and distribute.
+- No major performance bottlenecks in queries or real-time updates.

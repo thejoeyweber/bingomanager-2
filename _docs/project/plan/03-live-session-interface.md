@@ -1,20 +1,20 @@
 # 03 – Live Session Interface
 
 ## Goals
-1. Implement the Caller Interface design with mock items.
-2. Add real-time or simulated item calling, including pause/resume.
-3. Provide a scrollable call history and a mechanism for skipping a call.
+1. Implement the Caller Interface with mock items.
+2. Add real-time or simulated calling (pause/resume).
+3. Show a scrollable call history.
 
 ## Key Tasks
-- Build the Caller page UI, referencing [components-list.md](../components-list.md#callhistorylist).
-- Display a random call from a mock data set (no DB).
-- Implement a “Claim Bingo” notification popup to show how it will look for the Organizer.
-- Show session stats (number of calls, potential winners) in stubbed form.
+- Build the Caller page UI (refer to [components-list.md](../components-list.md)).
+- Randomly pick items from the chosen List or Card Type (no DB yet).
+- “Claim Bingo” popup for Organizer to see how verification will look.
+- Show session stats (calls count, winners) in stub form.
 
-> **Implementation Approach (Real-Time Data)**  
-> Initially, we may rely on **periodic polling** or manual refresh calls to fetch new calls/claims from the server. If concurrency grows or we need more immediate updates, we can adopt **Supabase Realtime** or websockets in the future.
+> **Implementation Note**  
+> We may do periodic polling or manual refresh for mock real-time. Later, we can adopt websockets or Supabase Realtime if concurrency demands.
 
 ## Completion Criteria
-- The Caller screen is fully interactive with mock calls.
-- The user can simulate claims from a separate stubbed player view or a test button.
-- The session can be paused/resumed, and calls displayed in the history panel.
+- A fully interactive Caller screen with mock data.
+- Users can simulate claims from a test Player screen.
+- Pause/Resume calls, history displayed in a panel.
