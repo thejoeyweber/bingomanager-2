@@ -64,7 +64,8 @@ export const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
           className="max-w-xl text-balance text-xl"
         >
-          Professional bingo management software for organizers, callers, and players.
+          Professional bingo management software for organizers, callers, and
+          players.
         </motion.div>
 
         <motion.div

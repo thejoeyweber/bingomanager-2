@@ -30,7 +30,9 @@ export default async function PricingPage() {
           price="$10"
           description="Perfect for small events"
           buttonText="Subscribe Monthly"
-          buttonLink={process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY || "#"}
+          buttonLink={
+            process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK_MONTHLY || "#"
+          }
           userId={userId}
         />
         <PricingCard

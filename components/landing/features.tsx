@@ -32,12 +32,14 @@ interface FeatureProps {
 const features: FeatureProps[] = [
   {
     title: "Game Management",
-    description: "Create and manage multiple bingo games with custom cards and rules",
+    description:
+      "Create and manage multiple bingo games with custom cards and rules",
     icon: AppWindow
   },
   {
     title: "Real-time Calling",
-    description: "Professional caller interface with number tracking and verification",
+    description:
+      "Professional caller interface with number tracking and verification",
     icon: AudioWaveform
   },
   {
@@ -47,7 +49,8 @@ const features: FeatureProps[] = [
   },
   {
     title: "Security",
-    description: "Secure game sessions with player authentication and fraud prevention",
+    description:
+      "Secure game sessions with player authentication and fraud prevention",
     icon: Shield
   }
 ]
