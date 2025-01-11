@@ -3,9 +3,12 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import { useState } from "react"
 
-export default function GameOverviewPage() {
+export default function GamePage() {
+  // We can fetch game data using the [gameId] param from the route in a future step
+  // For now, this is a stubbed single-page approach
   const [numCards, setNumCards] = useState<string>("10")
 
   const handleGenerateCards = () => {
@@ -14,12 +17,13 @@ export default function GameOverviewPage() {
 
   return (
     <div className="space-y-6">
-      <h2 className="mb-2 text-2xl font-semibold">Game Overview</h2>
+      <h2 className="mb-2 text-2xl font-semibold">Game Configuration</h2>
 
       <div className="space-y-2">
-        <p className="text-xl">Sample Bingo Game (stub data)</p>
+        <p className="text-xl">Title &amp; Description (stub data)</p>
         <p className="text-muted-foreground">
-          This page would show the game details, rules, invited players, etc.
+          This single page will handle lists, card types, and card generation
+          for this game.
         </p>
       </div>
 
