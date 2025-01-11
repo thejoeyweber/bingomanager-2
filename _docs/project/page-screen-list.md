@@ -67,4 +67,4 @@ Below is each major page/screen in the application. We use the **updated** minim
 - **Game History**
   - Past sessions, “Clone Game,” “View Reports.”
 
-Once the above pages and flows are integrated, the app will be ready for real-time session logic (Step 03) and final polish.
+The above pages correspond to our new single “Game” page approach. The older wizard concept is fully removed.
