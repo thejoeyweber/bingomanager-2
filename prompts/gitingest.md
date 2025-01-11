@@ -6,4 +6,4 @@
 /components/ui*
 
 ## Documentation only
-/_docs*, README.md, .cursorrules
+/_docs*, README.md, .cursorrules, commit_history.txt
