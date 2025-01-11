@@ -13,34 +13,73 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card"
+import { DataTable } from "@/components/ui/data-table" // Example path
+import { ColumnDef } from "@tanstack/react-table"
+
+interface Game {
+  id: string
+  title: string
+  status: string
+}
 
 export default function DashboardPage() {
   const [showNewGameDialog, setShowNewGameDialog] = useState(false)
-
-  // Minimal form fields
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
-  // Sample mock
-  const mockGames = [
+  // Sample mock data for now:
+  const [games, setGames] = useState<Game[]>([
     { id: "holiday-bingo", title: "Holiday Bingo", status: "Draft" },
     { id: "office-party", title: "Office Party Bingo", status: "Live" }
+  ])
+
+  const columns: ColumnDef<Game>[] = [
+    {
+      accessorKey: "title",
+      header: () => <span>Title</span>,
+      cell: ({ row }) => (
+        <Link href={`/dashboard/${row.original.id}`} className="font-medium">
+          {row.original.title}
+        </Link>
+      )
+    },
+    {
+      accessorKey: "status",
+      header: () => <span>Status</span>,
+      cell: ({ row }) => <span>{row.original.status}</span>
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => {
+        const game = row.original
+        return (
+          <div className="flex gap-2">
+            <Link href={`/dashboard/${game.id}`}>
+              <Button variant="outline" size="sm">
+                Open
+              </Button>
+            </Link>
+            <Button variant="ghost" size="sm">
+              Start Live
+            </Button>
+          </div>
+        )
+      }
+    }
   ]
 
   const handleCreateGame = () => {
-    // In a future step, we'd call an action to create the game in the DB
-    // For now, stub an ID or navigate to a placeholder
-    const newGameId = "my-new-game"
+    const newId = title.toLowerCase().replace(/\s+/g, "-") || "untitled"
+    const newGame: Game = {
+      id: newId,
+      title,
+      status: "Draft"
+    }
+    setGames(prev => [newGame, ...prev])
     setShowNewGameDialog(false)
-    window.location.href = `/dashboard/${newGameId}`
+    setTitle("")
+    setDescription("")
   }
 
   return (
@@ -57,7 +96,6 @@ export default function DashboardPage() {
             <DialogHeader>
               <DialogTitle>Create New Game</DialogTitle>
             </DialogHeader>
-
             <div className="space-y-4">
               <div>
                 <Label htmlFor="title">Title</Label>
@@ -78,7 +116,6 @@ export default function DashboardPage() {
                 />
               </div>
             </div>
-
             <div className="mt-4 flex justify-end gap-2">
               <Button
                 variant="outline"
@@ -92,27 +129,8 @@ export default function DashboardPage() {
         </Dialog>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {mockGames.map(game => (
-          <Card key={game.id}>
-            <CardHeader>
-              <CardTitle>{game.title}</CardTitle>
-              <CardDescription>{game.status} game</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground text-sm">
-                {game.title} is currently in {game.status} status.
-              </p>
-            </CardContent>
-            <CardFooter className="flex gap-2">
-              <Link href={`/dashboard/${game.id}`}>
-                <Button variant="outline">Open Game</Button>
-              </Link>
-              <Button variant="ghost">Start Live</Button>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+      {/* Data Table displaying the games */}
+      <DataTable columns={columns} data={games} />
     </div>
   )
 }
