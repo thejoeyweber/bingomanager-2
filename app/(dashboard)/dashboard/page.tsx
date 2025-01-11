@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -13,8 +15,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { DataTable } from "@/components/ui/data-table" // Example path
+import { DataTable } from "@/components/data-table"
 import { ColumnDef } from "@tanstack/react-table"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface Game {
   id: string
@@ -83,54 +86,57 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">My Games</h1>
-        <Dialog open={showNewGameDialog} onOpenChange={setShowNewGameDialog}>
-          <DialogTrigger asChild>
-            <Button onClick={() => setShowNewGameDialog(true)}>
-              + New Game
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Create New Game</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="title">Title</Label>
-                <Input
-                  id="title"
-                  placeholder="My Bingo Game"
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                />
+    <Card className="p-6">
+      <CardHeader className="px-0 pt-0">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl">My Games</CardTitle>
+          <Dialog open={showNewGameDialog} onOpenChange={setShowNewGameDialog}>
+            <DialogTrigger asChild>
+              <Button>+ New Game</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Create New Game</DialogTitle>
+                <DialogDescription>
+                  Create a new bingo game by filling out the details below.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="title">Title</Label>
+                  <Input
+                    id="title"
+                    placeholder="My Bingo Game"
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="description">Description</Label>
+                  <Textarea
+                    id="description"
+                    placeholder="Optional description..."
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
+                  />
+                </div>
               </div>
-              <div>
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  placeholder="Optional description..."
-                  value={description}
-                  onChange={e => setDescription(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="mt-4 flex justify-end gap-2">
-              <Button
-                variant="outline"
-                onClick={() => setShowNewGameDialog(false)}
-              >
-                Cancel
-              </Button>
-              <Button onClick={handleCreateGame}>Create</Button>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </div>
-
-      {/* Data Table displaying the games */}
-      <DataTable columns={columns} data={games} />
-    </div>
+              <DialogFooter>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowNewGameDialog(false)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleCreateGame}>Create</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardHeader>
+      <CardContent className="px-0">
+        <DataTable columns={columns} data={games} />
+      </CardContent>
+    </Card>
   )
 }
