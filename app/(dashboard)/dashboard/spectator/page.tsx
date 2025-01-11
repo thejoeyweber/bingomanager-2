@@ -3,11 +3,10 @@
 import React, { useEffect, useState } from "react"
 import BingoCardGrid from "../../player/_components/bingo-card-grid"
 import { BingoStore } from "../live/_components/bingo-store"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 export default function SpectatorPage() {
   const [calls, setCalls] = useState<string[]>([])
-
-  // Example items same as the player, for demonstration:
   const mockItems = [
     "B-1",
     "B-2",
@@ -37,32 +36,33 @@ export default function SpectatorPage() {
   ]
 
   useEffect(() => {
-    // Load initial calls
     setCalls([...BingoStore.calls])
-
-    // Optional: You could set up a simple interval or an event to refresh calls automatically
     const intervalId = setInterval(() => {
       setCalls([...BingoStore.calls])
     }, 3000)
-
     return () => clearInterval(intervalId)
   }, [])
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Spectator Screen</h2>
-      <p>
-        This view allows spectators to follow along in real time. The squares
-        corresponding to called items are highlighted, but are read-only.
-      </p>
-
-      <BingoCardGrid
-        items={mockItems}
-        calledItems={calls}
-        markedSquares={{}}
-        readOnly={true}
-        gridSize={5}
-      />
-    </div>
+    <Card className="space-y-4">
+      <CardHeader>
+        <CardTitle className="text-xl font-semibold">
+          Spectator Screen
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <p className="text-muted-foreground text-sm">
+          This is a read-only view of the Bingo session. Squares corresponding
+          to called items are highlighted.
+        </p>
+        <BingoCardGrid
+          items={mockItems}
+          calledItems={calls}
+          markedSquares={{}}
+          readOnly={true}
+          gridSize={5}
+        />
+      </CardContent>
+    </Card>
   )
 }

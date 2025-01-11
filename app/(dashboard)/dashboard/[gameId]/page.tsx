@@ -11,11 +11,16 @@ import {
   PopoverTrigger,
   PopoverContent
 } from "@/components/ui/popover"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardDescription
+} from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
 
-// Mock data for lists
 const initialLists = [
   {
     id: "list-1",
@@ -35,7 +40,6 @@ const initialLists = [
   }
 ]
 
-// Mock data for card types
 const initialCardTypes = [
   {
     id: "type-1",
@@ -58,20 +62,15 @@ const initialCardTypes = [
 ]
 
 export default function GamePage() {
-  // Current tab
   const [tabValue, setTabValue] = useState("lists")
-
-  // Mock data states
   const [lists, setLists] = useState(initialLists)
   const [cardTypes, setCardTypes] = useState(initialCardTypes)
 
-  // For generating cards from a chosen Card Type
   const [selectedCardTypeId, setSelectedCardTypeId] = useState<string>(
     initialCardTypes[0].id
   )
   const [cardCount, setCardCount] = useState("10")
 
-  // Optional tutorial popover
   const [tourOpen, setTourOpen] = useState(false)
 
   const handleAddList = () => {
@@ -124,7 +123,6 @@ export default function GamePage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Game Page (Single Page Flow)</h1>
 
-        {/* Optional Tutorial/Popover */}
         <Popover open={tourOpen} onOpenChange={setTourOpen}>
           <PopoverTrigger asChild>
             <Button variant="ghost">Help/Tour</Button>
@@ -157,18 +155,17 @@ export default function GamePage() {
           <TabsTrigger value="generation">Card Generation</TabsTrigger>
         </TabsList>
 
-        {/* Lists Tab */}
         <TabsContent value="lists" className="mt-4 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">Manage Lists</h2>
             <Button onClick={handleAddList}>+ Add List</Button>
           </div>
-
           <div className="space-y-4">
             {lists.map(list => (
               <Card key={list.id}>
                 <CardHeader>
                   <CardTitle>{list.name}</CardTitle>
+                  <CardDescription>A group of items for Bingo.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <Button
@@ -177,13 +174,13 @@ export default function GamePage() {
                   >
                     + Add Item
                   </Button>
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     {list.items.map(item => (
                       <div
                         key={item.id}
-                        className="flex items-center justify-between rounded border p-2"
+                        className="flex items-center justify-between rounded-md border p-2"
                       >
-                        <p>{item.text}</p>
+                        <p className="text-sm">{item.text}</p>
                         <div className="flex items-center gap-2">
                           <Checkbox
                             checked={item.isMandatory}
@@ -219,48 +216,40 @@ export default function GamePage() {
           </div>
         </TabsContent>
 
-        {/* Card Types Tab */}
         <TabsContent value="card-types" className="mt-4 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">Card Types</h2>
             <Button onClick={handleAddCardType}>+ Add Card Type</Button>
           </div>
-
           <div className="space-y-4">
             {cardTypes.map(type => (
               <Card key={type.id}>
                 <CardHeader>
                   <CardTitle>{type.name}</CardTitle>
+                  <CardDescription>
+                    References list: {type.listId}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-2">
-                  <Label className="text-sm">
-                    Referenced List: {type.listId}
-                  </Label>
-                  <Label className="text-sm">
+                <CardContent className="grid gap-2 text-sm">
+                  <Label>
                     Grid Size: {type.gridSize}x{type.gridSize}
                   </Label>
                   {type.hasFreeSpace && (
-                    <Label className="text-sm">
-                      Free Space Text: {type.freeSpaceText || "(none)"}
-                    </Label>
+                    <Label>Free Space: {type.freeSpaceText || "(none)"}</Label>
                   )}
-                  <Label className="text-sm">
-                    Color Scheme: {type.colorScheme}
-                  </Label>
+                  <Label>Color Scheme: {type.colorScheme}</Label>
                 </CardContent>
               </Card>
             ))}
           </div>
         </TabsContent>
 
-        {/* Card Generation Tab */}
         <TabsContent value="generation" className="mt-4 space-y-4">
           <h2 className="text-xl font-semibold">Generate Cards</h2>
-
           <div className="max-w-md space-y-2">
             <Label>Choose Card Type</Label>
             <select
-              className={cn("w-full rounded border p-2")}
+              className={cn("w-full rounded-md border p-2")}
               value={selectedCardTypeId}
               onChange={e => setSelectedCardTypeId(e.target.value)}
             >

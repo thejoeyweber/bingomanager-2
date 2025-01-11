@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { BingoStore } from "../live/_components/bingo-store"
 import BingoCardGrid from "./_components/bingo-card-grid"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 export default function PlayerPage() {
-  // For demonstration, let's assume we have a 5x5 card of items:
   const mockItems = [
     "B-1",
     "B-2",
@@ -61,23 +61,24 @@ export default function PlayerPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <h2 className="mb-2 text-xl font-semibold">Player Screen</h2>
+    <Card className="space-y-4">
+      <CardHeader>
+        <CardTitle className="text-xl font-semibold">Player Screen</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-muted-foreground text-sm">
+          Here is your interactive Bingo card. Called items are highlighted in
+          blue, and squares you click are marked in green. Refresh calls to stay
+          updated, and click “Claim Bingo” when ready.
+        </p>
 
-      <p className="text-sm">
-        This page shows an interactive Bingo card. Called items are highlighted
-        in blue, and any squares you click are marked in green. You can refresh
-        calls from the store or claim a Bingo at any time.
-      </p>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handleRefreshCalls}>
+            Refresh Calls
+          </Button>
+          <Button onClick={handleClaimBingo}>Claim Bingo</Button>
+        </div>
 
-      <div className="flex gap-2">
-        <Button variant="outline" onClick={handleRefreshCalls}>
-          Refresh Calls
-        </Button>
-        <Button onClick={handleClaimBingo}>Claim Bingo</Button>
-      </div>
-
-      <div className="mt-4">
         <BingoCardGrid
           items={mockItems}
           calledItems={calls}
@@ -86,7 +87,7 @@ export default function PlayerPage() {
           readOnly={false}
           gridSize={5}
         />
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
