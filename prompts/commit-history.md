@@ -1,0 +1,1 @@
+git log --no-merges --pretty=format:"%H%n%an%n%ad%n%s%n%b%n----------------------" >> commit_history.txt
