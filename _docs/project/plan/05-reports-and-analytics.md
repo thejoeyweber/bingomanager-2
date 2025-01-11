@@ -3,7 +3,7 @@
 ## Goals
 1. Implement session summary pages with mock data.
 2. Provide CSV/PDF export with a chosen library (e.g., **pdf-lib**).
-3. Integrate PostHog (front-end only) for basic event tracking.
+3. ~~Integrate PostHog~~ (moved to Step 08)
 
 ## Key Tasks
 - Build a Session Summary UI (calls, winners, timestamps).
