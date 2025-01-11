@@ -28,53 +28,43 @@ Below is each major page/screen in the application. We use the **updated** minim
 - **Profile & Settings**
   - Manage user data, subscription, sign out.
 
-## 4. (Original) Create/Edit Game Wizard (Legacy)
-> **Archived/Outdated**  
-> This was the original 4-step wizard concept. It has been **superseded** by the minimal “New Game” approach plus the comprehensive single Game page (Lists, Card Types, etc.). We keep the outline below for historical reference only.
-
-- **Step 1: Basic Info**  
-- **Step 2: Items Setup**  
-- **Step 3: Layout & Rules**  
-- **Step 4: Review & Save**
-
-## 5. Game Overview Page
-- **Overview**  
+## 4. Game Overview Page
+- **Overview**
   - Title, description, default call mode, other meta.
-- **Lists**  
-  - Create or attach a list, add items (text or image).
-  - Mark mandatory items as needed.
-- **Card Types**  
+- **Lists**
+  - Create or attach a list, add items (text or image), mark mandatory if needed.
+- **Card Types**
   - Reference a chosen list. 
   - Set grid size, free space, color scheme, etc.
-- **Card Generation**  
+- **Card Generation**
   - Input how many cards, choose PDF (pdf-lib or similar) or link-based.
   - Optionally email invites using SendGrid (to be implemented in Step 06).
-- **Session Management**  
+- **Session Management**
   - “Start Live Session,” “Add Co-Organizer,” etc.
-- **Settings**  
+- **Settings**
   - Toggle public/private, edit items if not live.
 
-## 6. Live Session (Caller) Interface
+## 5. Live Session (Caller) Interface
 - **Main Caller Panel**
   - Current item, “Call Next” or auto-call.
   - Past calls, pause/resume, end session.
 - **Winner Claims**
   - Notifications, verification modal.
 
-## 7. Player Card Screen
+## 6. Player Card Screen
 - **Interactive Bingo Card**
   - Mark cells, “Claim Bingo.”
 - **Call Feed**
   - Shows recent calls.
 
-## 8. Spectator Screen
+## 7. Spectator Screen
 - **Live Calls Display**
   - Chronological calls, winners, near-wins if allowed.
 
-## 9. Reports & Analytics
+## 8. Reports & Analytics
 - **Session Summary**
   - Calls, winners, timestamps, export as CSV/PDF.
 - **Game History**
   - Past sessions, “Clone Game,” “View Reports.”
 
-The next steps integrate actual DB data in [06-backend-and-db-integration.md](./plan/06-backend-and-db-integration.md).
+Once the above pages and flows are integrated, the app will be ready for real-time session logic (Step 03) and final polish.
