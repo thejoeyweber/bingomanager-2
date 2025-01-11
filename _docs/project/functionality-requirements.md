@@ -1,6 +1,6 @@
 # Functionality & Feature Requirements
 
-All items in this file are part of our initial release scope, now updated with the new approach for Lists, Card Types, etc.
+All items in this file are part of our initial release scope, updated to reflect the new approach using Lists, Card Types, etc.
 
 ## 1. Game Creation & Management
 - **Minimal “New Game” Creation**  
@@ -12,21 +12,22 @@ All items in this file are part of our initial release scope, now updated with t
   - Card Type defines grid size, free space, color scheme, etc.
 - **Game Rules & Pacing**  
   - Default call mode (manual vs. timed) can be set at the game level, overridden by a Card Type or Session.
-  - Round-based or single-round sessions are supported.
+  - Round-based or single-round sessions are supported (for v1, typically single round).
 - **Card Generation & Distribution**  
   - Generate unique cards in PDF or via online links from a Card Type.
-  - Download in bulk or email to participants.
-  - Integrate a low-cost email service (e.g., SendGrid) for invites if needed.
+  - Use [pdf-lib or a similar library](./plan/05-reports-and-analytics.md) for PDFs.
+  - Optionally email invites to participants via **SendGrid** (implemented in Step 06).
 - **Templates**  
   - Let users save game setups (Lists, Card Types) as templates.
-  - Provide import/export for templates.
+  - Provide import/export for templates if desired.
 
 ## 2. Live Session (Caller) Interface
 - **Real-Time Calls**  
-  - Randomly display called items from the chosen List or Card Type arrangement.
+  - Randomly display called items from the chosen List or Card Type.
   - Keep a visible, scrollable call history.
+  - For v1, implement manual refresh or minimal polling. (WebSockets or Supabase Realtime may come in Step 08.)
 - **Caller Controls**  
-  - Pause/resume, skip, or re-draw calls as needed.
+  - Pause/resume, skip, or re-draw calls.
   - Display stats (calls count, winner count).
 - **Round Transition**  
   - Handle multiple rounds if configured.
@@ -34,26 +35,24 @@ All items in this file are part of our initial release scope, now updated with t
 
 ## 3. Player & Spectator Experience
 - **Join a Game**  
-  - Via invite link, code, or email.
+  - Via invite link, code, or email (pending SendGrid in Step 06).
 - **Bingo Card Interaction**  
-  - Each card is generated from a Card Type layout.
   - A “Claim Bingo” button alerts the Organizer.
 - **Spectator Mode**  
   - Read-only display of calls and progress.
 
 ## 4. Collaboration & Sharing
 - **Co-Organizers**  
-  - Organizer can invite or remove co-organizers with shared access. 
-  - For more complexity, use an `account_members` pivot table.
+  - Organizer can invite or remove co-organizers (account-based logic).
 - **Public & Private Sharing**  
-  - Optionally password/code-protect a game.
+  - Optionally password/code-protect a game (beyond v1 scope if desired).
   - Could require sign-in for private events.
 
 ## 5. Analytics & Reporting
 - **Session Overview**  
   - Called items in order, timestamps, winners.
 - **Export**  
-  - PDF or CSV for each session’s results.
+  - PDF or CSV for each session’s results (via pdf-lib or similar).
 - **Multi-Session Insights**  
   - Past sessions stored and displayed.
 
@@ -61,7 +60,7 @@ All items in this file are part of our initial release scope, now updated with t
 - **User Profiles**  
   - Clerk-based auth, data in Postgres via Supabase.
 - **Roles**  
-  - Organizer, Co-Organizer, Player, Spectator, with advanced roles possible later.
+  - Organizer, Co-Organizer, Player, Spectator (and advanced roles later if needed).
 - **Data Storage**  
   - Use Drizzle ORM for game configs, cards, session results in the DB.
 - **Membership Tiers**  
@@ -81,7 +80,7 @@ All items in this file are part of our initial release scope, now updated with t
 - **Text-to-Speech**  
   - Optional read-out of called items.
 - **Multi-Language**  
-  - Lists and interface in multiple languages.
+  - Lists and interface in multiple languages if needed.
 
 ## 9. Scalability & Performance
 - **Large Events**  
@@ -91,4 +90,4 @@ All items in this file are part of our initial release scope, now updated with t
 - **Analytics**  
   - Track usage with PostHog.
 
-Use these requirements with [app-flow.md](./app-flow.md) and `.cursorrules` for detailed guidelines.
+All features here align with [app-flow.md](./app-flow.md) and the new approach described in [02.01-core-ui-screens.md](./plan/02.01-core-ui-screens.md). 

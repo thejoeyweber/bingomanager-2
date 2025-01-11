@@ -1,4 +1,3 @@
-
 # App Flow & User Journeys
 
 The following user flows are definitive and must be implemented in the Next.js `app` directory, following the structure specified in [Project Instructions](../.cursorrules) and [README.md](../README.md).
@@ -19,33 +18,31 @@ The following user flows are definitive and must be implemented in the Next.js `
 1. **View My Games**  
    - Show existing games with status labels (Draft, Live, Completed).
    - Provide actions: Edit, Start Live Session, View Reports.
-2. **Create New Game (4-Step Wizard)**
-   - **Step 1: Basic Info**  
-     - Title, description, theme, language.
-   - **Step 2: Items Setup**  
-     - Input text or upload images (with cropping) for game items.
-   - **Step 3: Layout & Rules**  
-     - Select grid size, winning patterns, color branding, pacing rules.
-   - **Step 4: Review & Save**  
-     - Show final preview, confirm settings, optionally save as template.
+2. **Create New Game (Minimal Form)**  
+   - **Title** (required), **Description** (optional).
+   - On submission, instantly create a Draft game and navigate to its page.
+   - Further setup (Lists, Card Types, etc.) is handled within that Game’s page.
 
 ## 3. Game Overview & Preparation
 - **Game Overview Page**  
-  - Display summary (title, item count, rules).
-  - Provide buttons for card generation/distribution.
-  - Manage invites (players, co-organizers).
+  - Display summary (title, item count, rules, default call mode).
+  - Provide sections or tabs for:
+    - **Lists**: Manage items, images, mandatory flags.
+    - **Card Types**: Choose grid size, free space, color branding, etc.
+  - Manage invites (players, co-organizers) using **SendGrid** in Step 06.
 - **Card Generation Flow**  
   - Specify the number of unique cards to generate.
-  - Generate PDFs or unique online links.
-  - Optionally send bulk invitations by email (requires integration details specified later).
+  - Generate PDFs (using [pdf-lib or a similar library](../plan/05-reports-and-analytics.md)) or unique online links.
+  - Optionally send invites by email with **SendGrid** (implemented in Step 06).
 
 ## 4. Live Session (Caller) Interface
 - **Start a Live Session**  
   - Initiate call sequence (random shuffle of items).
-  - Load session data via server component.
+  - Load session data via server component, using manual refresh or minimal polling for real-time in v1.
+  - (WebSockets or Supabase Realtime may be added in Step 08.)
 - **Caller Screen**  
   - “Call Next Item” or timed auto-call.
-  - Display current item (text/image) in a prominent area.
+  - Display current item (text/image).
   - Show a scrollable list of past calls on the side or bottom.
   - Pause/Resume and End Session controls.
 - **Winning Claims**  
@@ -55,18 +52,20 @@ The following user flows are definitive and must be implemented in the Next.js `
 ## 5. Player & Spectator Flows
 - **Joining a Game**  
   - Enter via shared link/code.
-  - Player is assigned or shown their unique card.
+  - Player is assigned or shown their unique card (online) or uses a printed/PDF card.
   - Spectator sees calls and results without a playable card.
 - **Bingo Card Screen**  
-  - Display an interactive grid. Mark cells when called items match.
+  - Interactive grid to mark cells for online cards. 
   - “Claim Bingo” triggers a notification to the Organizer.
 
 ## 6. Post-Session & Reports
 - **Session Summary**  
   - Chronological call history, timestamped winner claims, total calls.
-  - Export results as CSV or PDF.
+  - Export results as CSV or PDF (see [05-reports-and-analytics.md](../plan/05-reports-and-analytics.md)).
 - **Game History**  
   - Show past sessions for each game.
   - Provide “Clone Game” or “View Reports” options.
 
-These flows must be implemented using stubbed or mock data first, ensuring all UI and transitions are correct. Afterwards, we will integrate final data sources (DB, server actions, etc.).
+Throughout development:
+- Use stubbed or mock data first to ensure UI and transitions are correct.
+- Afterwards, integrate final data sources (DB, server actions, etc.) as per [06-backend-and-db-integration.md](../plan/06-backend-and-db-integration.md).

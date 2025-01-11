@@ -1,6 +1,6 @@
 # Page & Screen Requirements
 
-Below is each major page/screen in the application with the new approach. These pages will be built first with stubbed data, then integrated with the backend.
+Below is each major page/screen in the application. We use the **updated** minimal “New Game” approach outlined in [02.01-core-ui-screens.md](./plan/02.01-core-ui-screens.md). The pages will be built first with stubbed data, then integrated with the backend.
 
 ## 1. Landing Page
 - **Header**
@@ -24,12 +24,14 @@ Below is each major page/screen in the application with the new approach. These 
 - **Dashboard Home**
   - List of games (Draft, Live, Completed).
   - Buttons: Edit, Start Session, Reports, etc.
-  - “Create New Game” → minimal form (title, description).
+  - “Create New Game” → small dialog for Title, optional Description; navigates to new Draft game.
 - **Profile & Settings**
   - Manage user data, subscription, sign out.
 
-## 4. (Original) Create/Edit Game Wizard
-> **Note**: Now largely replaced by the approach in [02.01-core-ui-screens.md](../plan/02.01-core-ui-screens.md). The following steps remain in place for legacy reference:
+## 4. (Original) Create/Edit Game Wizard (Legacy)
+> **Archived/Outdated**  
+> This was the original 4-step wizard concept. It has been **superseded** by the minimal “New Game” approach plus the comprehensive single Game page (Lists, Card Types, etc.). We keep the outline below for historical reference only.
+
 - **Step 1: Basic Info**  
 - **Step 2: Items Setup**  
 - **Step 3: Layout & Rules**  
@@ -37,14 +39,16 @@ Below is each major page/screen in the application with the new approach. These 
 
 ## 5. Game Overview Page
 - **Overview**  
-  - Title, summary of items/rules, default call mode.
+  - Title, description, default call mode, other meta.
 - **Lists**  
-  - Attach existing list or create a new one (import items).
+  - Create or attach a list, add items (text or image).
+  - Mark mandatory items as needed.
 - **Card Types**  
-  - Create multiple card types referencing a chosen list.
-  - Configure grid size, free space, colors, etc.
+  - Reference a chosen list. 
+  - Set grid size, free space, color scheme, etc.
 - **Card Generation**  
-  - Input how many cards, PDF vs. link, distribution.
+  - Input how many cards, choose PDF (pdf-lib or similar) or link-based.
+  - Optionally email invites using SendGrid (to be implemented in Step 06).
 - **Session Management**  
   - “Start Live Session,” “Add Co-Organizer,” etc.
 - **Settings**  
@@ -61,7 +65,7 @@ Below is each major page/screen in the application with the new approach. These 
 - **Interactive Bingo Card**
   - Mark cells, “Claim Bingo.”
 - **Call Feed**
-  - Shows recent calls if needed.
+  - Shows recent calls.
 
 ## 8. Spectator Screen
 - **Live Calls Display**
@@ -73,4 +77,4 @@ Below is each major page/screen in the application with the new approach. These 
 - **Game History**
   - Past sessions, “Clone Game,” “View Reports.”
 
-We build these pages in Next.js with placeholders, then integrate actual DB data in later steps.
+The next steps integrate actual DB data in [06-backend-and-db-integration.md](./plan/06-backend-and-db-integration.md).

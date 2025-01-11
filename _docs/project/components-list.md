@@ -8,7 +8,7 @@ This file details specialized components not already covered by Shadcn UI. We wi
    - Renders an N x N grid of items.
    - Accepts an array of item data (text or image) and a “called-items” state.
    - Provides a “mark” action for players or a read-only mode for spectators.
-   - Some items may be designated “mandatory” (always included) if the Card Type’s list enforces them.
+   - Some items may be designated “mandatory” (always included).
    - Built using `Card`, `Button`, or `Table` from `/components/ui`.
 
 2. **GameItemUploader** (or “ListItemUploader”)
@@ -16,7 +16,6 @@ This file details specialized components not already covered by Shadcn UI. We wi
    - Uses Shadcn UI `Dialog` and `Form` to guide the user.
    - Integrates with Next.js server actions for file storage (Supabase).
    - If item is an image, it may also have an optional caption field.
-   - (In the new approach, these items may belong to a “List.”)
 
 3. **CallHistoryList**
    - Displays a scrollable list of called items (text or thumbnails).
@@ -31,8 +30,10 @@ This file details specialized components not already covered by Shadcn UI. We wi
 
 5. **CardGenerationConfig**
    - A form or modal for generating cards (number of cards, PDF vs. link).
-   - Incorporates Shadcn UI form elements (select, input).
-   - On submission, triggers server or local mock action until backend integration is ready.
+   - Uses Shadcn UI form elements (select, input).
+   - On submission, triggers a server action that:
+     - Uses **pdf-lib (Step 05)** for PDF creation.
+     - Uses **SendGrid (Step 06)** for emailing invites if the user chooses.
 
 ## 2. Standard Shadcn UI Components
 
@@ -102,7 +103,7 @@ Never edit or change the existing shadcn/ui components directly.
 
 ## 3. Reusable Patterns
 - **Wizard/Stepper**  
-  - We originally had a 4-step wizard, but have introduced a more flexible approach. If you still want wizard-like steps, you can do so in the “Game” page as a guided flow.
+  - Legacy concept. Now replaced by a more flexible “Game” page with optional guided steps.
 - **Dashboard Layout**  
   - A shared layout with a sidebar for navigation.
 - **Overlay Notifications**  
@@ -118,4 +119,4 @@ Never edit or change the existing shadcn/ui components directly.
 - For route-specific components, place them under `app/[route]/_components`.
 - For truly shared components, place them under `components/`.
 
-These definitions will be implemented first with stubbed data; final integration with Drizzle ORM, Supabase, etc. will occur in later steps.
+These definitions should be implemented with stubbed data initially, then connected to Drizzle ORM and Supabase in [06-backend-and-db-integration.md](./plan/06-backend-and-db-integration.md).

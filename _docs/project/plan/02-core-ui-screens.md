@@ -1,7 +1,8 @@
-# 02 – Core UI Screens
+# 02 – Core UI Screens (Archived/Outdated)
 
-> **Note**  
-> This plan originally implemented a 4-step “Create New Game” wizard. It is now **out of date**, replaced by [02.01-core-ui-screens.md](./02.01-core-ui-screens.md). We keep it for historical reference.
+> **ARCHIVED / OUTDATED**  
+> This file describes the **original** plan for a 4-step “Create New Game” wizard.  
+> **It is kept solely for historical reference** and is superseded by [02.01-core-ui-screens.md](./02.01-core-ui-screens.md), which contains the current, minimal “New Game” approach and a single Game page layout.
 
 ## Goals (Original)
 1. Flesh out UI for main screens with stubbed data.
@@ -17,3 +18,7 @@
 - Wizard steps fully functional in front-end only.
 - Game Overview shows placeholder data, allows stubbed card generation.
 - UI elements follow Tailwind + Shadcn guidelines.
+
+---
+
+**Note**: For the current plan, see [02.01-core-ui-screens.md](./02.01-core-ui-screens.md).
