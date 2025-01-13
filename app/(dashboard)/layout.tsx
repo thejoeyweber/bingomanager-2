@@ -1,8 +1,19 @@
 "use server"
 
-import Header from "@/components/header"
+import { notFound } from "next/navigation"
 import { AppSidebar } from "@/components/sidebar/app-sidebar"
-import { SidebarProvider } from "@/components/ui/sidebar"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger
+} from "@/components/ui/sidebar"
+import { Separator } from "@/components/ui/separator"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList
+} from "@/components/ui/breadcrumb"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -13,19 +24,29 @@ export default async function DashboardLayout({
 }: DashboardLayoutProps) {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen flex-col md:flex-row">
-        {/* Sidebar on the left for medium+ screens */}
-        <div className="hidden h-screen md:flex md:w-64 md:flex-none">
-          <AppSidebar className="border-r" />
-        </div>
+      {/* Sidebar */}
+      <AppSidebar />
 
-        {/* For mobile, we can position the drawer version of the sidebar in <AppSidebar> if needed */}
-        <div className="md:hidden">
-          <Header />
-        </div>
+      {/* Main Content */}
+      <SidebarInset>
+        {/* Top Header */}
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
 
-        <main className="flex-1 overflow-hidden p-4 md:p-6">{children}</main>
-      </div>
+        {/* Page Content */}
+        <div className="flex-1 overflow-auto p-4 md:p-6">{children}</div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

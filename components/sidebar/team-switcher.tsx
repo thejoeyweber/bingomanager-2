@@ -6,7 +6,7 @@ This client component provides a team switcher for the sidebar.
 
 "use client"
 
-import { ChevronsUpDown, Plus } from "lucide-react"
+import { ChevronsUpDown, Plus, User } from "lucide-react"
 import * as React from "react"
 
 import {
@@ -25,8 +25,14 @@ import {
   useSidebar
 } from "@/components/ui/sidebar"
 
+const defaultTeam = {
+  name: "Personal Account",
+  logo: User,
+  plan: "Free"
+}
+
 export function TeamSwitcher({
-  teams
+  teams = []
 }: {
   teams: {
     name: string
@@ -35,7 +41,9 @@ export function TeamSwitcher({
   }[]
 }) {
   const { isMobile } = useSidebar()
-  const [activeTeam, setActiveTeam] = React.useState(teams[0])
+  const [activeTeam, setActiveTeam] = React.useState(teams[0] || defaultTeam)
+
+  const allTeams = teams.length ? teams : [defaultTeam]
 
   return (
     <SidebarMenu>
@@ -67,7 +75,7 @@ export function TeamSwitcher({
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Teams
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
+            {allTeams.map((team, index) => (
               <DropdownMenuItem
                 key={team.name}
                 onClick={() => setActiveTeam(team)}

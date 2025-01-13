@@ -8,8 +8,8 @@ import {
   DialogHeader,
   DialogTitle
 } from "@/components/ui/dialog"
-import { CallHistoryList } from "./_components/call-history-list"
-import { BingoStore } from "./_components/bingo-store"
+import { CallHistoryList } from "@/components/call-history-list"
+import { BingoStore } from "@/components/bingo-store"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const MOCK_ITEMS = [

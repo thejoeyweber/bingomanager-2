@@ -1,9 +1,3 @@
-/*
-<ai_context>
-This client component provides the header for the app.
-</ai_context>
-*/
-
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -19,30 +13,56 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { ThemeSwitcher } from "./utilities/theme-switcher"
 
-const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/contact", label: "Contact" }
+interface HeaderProps {
+  variant?: "marketing" | "dashboard"
+}
+
+const marketingNavItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+  { label: "Pricing", href: "/pricing" }
 ]
 
-const signedInLinks = [{ href: "/dashboard", label: "Dashboard" }]
-
-export default function Header() {
+export default function Header({ variant = "marketing" }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 0)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  if (variant === "dashboard") {
+    return (
+      <header className="bg-background/90 sticky top-0 z-50 shadow-sm backdrop-blur-sm">
+        <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4">
+          <div className="flex items-center space-x-2">
+            <Link href="/dashboard" className="text-xl font-bold">
+              Bingo Manager
+            </Link>
+          </div>
+          <div className="flex items-center space-x-4">
+            <ThemeSwitcher />
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton>
+                <Button variant="outline">Login</Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button>Sign Up</Button>
+              </SignUpButton>
+            </SignedOut>
+          </div>
+        </div>
+      </header>
+    )
+  }
 
   return (
     <header
@@ -53,108 +73,82 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-screen-2xl items-center justify-between p-4">
-        <div className="flex items-center space-x-2 hover:cursor-pointer hover:opacity-80">
+        <div className="flex items-center space-x-2">
           <Rocket className="size-6" />
           <Link href="/" className="text-xl font-bold">
             Bingo Manager
           </Link>
         </div>
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 space-x-2 font-semibold md:flex">
-          {navLinks.map(link => (
+        {/* Desktop Navigation */}
+        <nav className="hidden items-center space-x-8 md:flex">
+          {marketingNavItems.map(item => (
             <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-3 py-1 hover:opacity-80"
+              key={item.href}
+              href={item.href}
+              className="text-foreground/60 hover:text-foreground/80"
             >
-              {link.label}
+              {item.label}
             </Link>
           ))}
-
-          <SignedIn>
-            {signedInLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full px-3 py-1 hover:opacity-80"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </SignedIn>
-        </nav>
-
-        <div className="flex items-center space-x-4">
           <ThemeSwitcher />
-
+          <SignedIn>
+            <Link href="/dashboard">
+              <Button>Dashboard</Button>
+            </Link>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
           <SignedOut>
             <SignInButton>
               <Button variant="outline">Login</Button>
             </SignInButton>
-
             <SignUpButton>
-              <Button className="bg-blue-500 hover:bg-blue-600">Sign Up</Button>
+              <Button>Sign Up</Button>
             </SignUpButton>
           </SignedOut>
+        </nav>
 
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? (
-                <X className="size-6" />
-              ) : (
-                <Menu className="size-6" />
-              )}
-            </Button>
-          </div>
-        </div>
+        {/* Mobile Menu Button */}
+        <button
+          className="text-muted-foreground hover:text-foreground md:hidden"
+          onClick={toggleMenu}
+        >
+          {isMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
+        </button>
       </div>
 
+      {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="bg-primary-foreground text-primary p-4 md:hidden">
-          <ul className="space-y-2">
-            <li>
+        <nav className="border-b md:hidden">
+          <div className="space-y-4 p-4">
+            {marketingNavItems.map(item => (
               <Link
-                href="/"
-                className="block hover:underline"
-                onClick={toggleMenu}
+                key={item.href}
+                href={item.href}
+                className="text-foreground/60 hover:text-foreground/80 block"
+                onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {item.label}
               </Link>
-            </li>
-            {navLinks.map(link => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="block hover:underline"
-                  onClick={toggleMenu}
-                >
-                  {link.label}
-                </Link>
-              </li>
             ))}
-            <SignedIn>
-              {signedInLinks.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="block hover:underline"
-                    onClick={toggleMenu}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </SignedIn>
-          </ul>
+            <div className="flex items-center gap-4 pt-4">
+              <ThemeSwitcher />
+              <SignedIn>
+                <Link href="/dashboard">
+                  <Button>Dashboard</Button>
+                </Link>
+                <UserButton afterSignOutUrl="/" />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton>
+                  <Button variant="outline">Login</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Sign Up</Button>
+                </SignUpButton>
+              </SignedOut>
+            </div>
+          </div>
         </nav>
       )}
     </header>

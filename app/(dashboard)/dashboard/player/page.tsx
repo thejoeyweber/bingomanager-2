@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { BingoStore } from "../live/_components/bingo-store"
-import BingoCardGrid from "./_components/bingo-card-grid"
+import { BingoStore } from "@/components/bingo-store"
+import BingoCardGrid from "@/components/bingo-card-grid"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 export default function PlayerPage() {
